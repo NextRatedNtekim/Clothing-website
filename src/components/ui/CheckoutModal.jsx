@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check, Download, Package, ShoppingBag, CreditCard, Receipt, ShieldCheck } from 'lucide-react';
+import { X, Check, Download, Package, ShoppingBag, CreditCard, ShieldCheck } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 
 function generateOrderNumber() {
