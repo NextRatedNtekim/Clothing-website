@@ -7,7 +7,10 @@
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { @apply bg-white text-brand-900 font-sans antialiased; }
+  body { 
+    @apply bg-white text-brand-900 font-sans antialiased;
+    overflow-x: hidden
+   }
 }
 
 @layer utilities {
