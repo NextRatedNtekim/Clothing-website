@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, use } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check, Download, Package, ShoppingBag, CreditCard, ShieldCheck } from 'lucide-react';
+import { X, Check, Download, Package } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 
 function generateOrderNumber() {
@@ -96,7 +96,7 @@ function Receipt({ order, onClose }) {
 
         <div className="flex justify-between mb-1">
           <span className="text-xs uppercase tracking-widest text-brand-400">Order No.</span>
-          <span className="text-sm font-semibold text-brand-900">{order.orderNumber}</span>
+          <span className="text-sm font-semibold text-brand-900 break-all text-right ml-3">{order.orderNumber}</span>
         </div>
         <div className="flex justify-between mb-4 pb-4 border-b border-brand-200">
           <span className="text-xs uppercase tracking-widest text-brand-400">Date</span>
@@ -165,6 +165,7 @@ export default function CheckoutModal({ isOpen, onClose }) {
 
   const shipping = subtotal >= 100 ? 0 : 9.99;
   const total    = subtotal + shipping;
+  
 
   const handlePlaceOrder = () => {
     const newOrder = {
@@ -192,53 +193,13 @@ export default function CheckoutModal({ isOpen, onClose }) {
           <motion.div key="co-bd" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" onClick={handleClose} />
           <motion.div
             key="co-modal"
-            // initial={{ opacity: 0, y: 40 }}
-            // animate={{ opacity: 1, y: 0 }}
-            // exit={{ opacity: 0, y: 40 }}
-            // transition={{ type: 'tween', duration: 0.28 }}
-            initial={{
-              opacity: 0,
-              y: 60,
-              scale: 0.96
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              scale: 1
-            }}
-            exit={{
-              opacity: 0,
-              y: 60,
-              scale: 0.96
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 24
-            }}
-            // className="fixed inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 top-1/2 -translate-y-1/2 z-50 w-full sm:w-[480px] bg-white shadow-2xl max-h-[90vh] overflow-y-auto"
-            className="
-                  fixed
-                  bottom-0
-                  left-0
-                  right-0
-                  sm:left-1/2
-                  sm:right-auto
-                  sm:top-1/2
-                  sm:-translate-x-1/2
-                  sm:-translate-y-1/2
-                  z-50
-                  w-full
-                  sm:w-[520px]
-                  bg-white
-                  shadow-2xl
-                  rounded-t-3xl
-                  sm:rounded-none
-                  max-h-[95vh]
-                  overflow-hidden
-                  "
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            transition={{ type: 'tween', duration: 0.28 }}
+            className="fixed top-[15%] left-[6%] sm:left-[20%] z-50 w-[85%] max-w-2xl -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-2xl max-h-[80vh] overflow-y-auto"
           >
-            <div className="p-6 sm:p-8">
+            <div className="px-5 py-6 sm:p-8">
               {/* Close button */}
               <button onClick={handleClose} className="absolute top-5 right-5 text-brand-400 hover:text-brand-900 transition-colors" aria-label="Close">
                 <X size={20} strokeWidth={1.5} />
@@ -251,7 +212,7 @@ export default function CheckoutModal({ isOpen, onClose }) {
                     <h2 className="font-display text-2xl font-semibold text-brand-900 mb-6">Order Summary</h2>
 
                     {/* Item list */}
-                    <ul className="space-y-4 mb-6 max-h-52 overflow-y-auto pr-1">
+                    <ul className="space-y-4 mb-6 max-h-[40vh] overflow-y-auto pr-1">
                       {items.map((item) => (
                         <li key={item.id} className="flex items-center gap-3">
                           <div className="w-12 h-12 bg-brand-50 border border-brand-100 shrink-0 flex items-center justify-center p-1">
@@ -288,7 +249,11 @@ export default function CheckoutModal({ isOpen, onClose }) {
                   </motion.div>
                 ) : (
                   <motion.div key="receipt" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                    <Receipt order={order} onClose={handleClose} />
+                    <Receipt 
+                    order={order} 
+                    onClose={handleClose}
+                    className="top-[10%] "
+                    />
                   </motion.div>
                 )}
               </AnimatePresence>

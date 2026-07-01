@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ShoppingBag, Search, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../context/CartContext';
+import { useGlobalSearch } from '../../context/SearchContext';
 
 const navLinks = [
   { label: 'Home',    path: '/' },
@@ -23,6 +24,7 @@ export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { totalItems, toggleCart, cartIconRef } = useCart();
+  const { openSearch } = useGlobalSearch();
   const location = useLocation();
 
   useEffect(() => {
@@ -74,7 +76,11 @@ export default function Navbar() {
             </nav>
 
             <div className="flex items-center gap-4">
-              <button className="text-brand-500 hover:text-brand-900 transition-colors" aria-label="Search">
+              <button
+                onClick={openSearch}
+                className="text-brand-500 hover:text-brand-900 transition-colors"
+                aria-label="Search"
+              >
                 <Search size={20} strokeWidth={1.5} />
               </button>
 

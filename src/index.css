@@ -6,11 +6,25 @@
 
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { 
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  body {
     @apply bg-white text-brand-900 font-sans antialiased;
-    overflow-x: hidden
-   }
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 @layer utilities {
